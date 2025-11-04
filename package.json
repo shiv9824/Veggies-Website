@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://github.com/shiv9824/Veggies-Website/",
+  "homepage": "https://shiv9824.github.io/Veggies-Website/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
