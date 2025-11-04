@@ -30,7 +30,7 @@ function App() {
   return (
     <>
     <ToastContainer />
-      <BrowserRouter basename='/Veggies-Website'>
+      <BrowserRouter basename='/54'>
       <userContext.Provider value={{email,setEmail,login,setLogin,cart,setCart}}>
       <Header></Header>
       <Routes>
