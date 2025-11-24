@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { userContext } from "./App";
+import { Link } from "react-router-dom";
 
 const AddToCart = () => {
   const { cart, setCart } = useContext(userContext);
@@ -7,24 +8,31 @@ const AddToCart = () => {
   const [selectedMethod, setSelectedMethod] = useState("");
 
   // ➕ Increment
-  const increment = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity + 1 } : item
-      )
-    );
-  };
+const increment = (id) => {
+  setCart((prevCart) =>
+    prevCart.map((item) =>
+      item.id === id
+        ? { ...item, quantity: (item.quantity || 1) + 1 }
+        : item
+    )
+  );
+};
+
 
   // ➖ Decrement
-  const decrement = (id) => {
-    setCart((prevCart) =>
-      prevCart.map((item) =>
-        item.id === id
-          ? { ...item, quantity: item.quantity > 1 ? item.quantity - 1 : 1 }
-          : item
-      )
-    );
-  };
+const decrement = (id) => {
+  setCart((prevCart) =>
+    prevCart.map((item) =>
+      item.id === id
+        ? {
+            ...item,
+            quantity: item.quantity && item.quantity > 1 ? item.quantity - 1 : 1
+          }
+        : item
+    )
+  );
+};
+
 
   // ❌ Remove
   const removeItem = (id) => {
@@ -103,7 +111,15 @@ const AddToCart = () => {
             );
           })
         ) : (
+          <div className="flex flex-col items-center mt-20">
           <p className="text-gray-600 text-lg">Your cart is empty 🛍️</p>
+          <Link to={'/product'}>
+          <button className="mt-4 bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">
+            Shop Now
+          </button>
+          </Link>
+        </div>
+          
         )}
       </div>
 

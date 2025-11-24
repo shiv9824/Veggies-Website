@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { userContext } from "./App";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { user } from "../user";
+
 
 function Login() {
   const { email, setEmail, login, setLogin } = useContext(userContext);
@@ -19,12 +21,20 @@ function Login() {
     e.preventDefault();
 
     const useremail = data.find((v) => v.email === email && v.pwd === pwd);
+    const Admin = user.find((v) => v.email === email && v.pwd === pwd);
 
     if (useremail) {
       toast.success("Login successful",{ autoClose: 1000 });
       setLogin(!login);
       navigate("/");
-    } else {
+
+    } 
+    else if (Admin) {
+      toast.success("Admin Login successful",{ autoClose: 1000 });
+      setLogin(!login);
+      navigate("/");
+    }
+    else {
       toast.error("Invalid details",{ autoClose: 1000 });
     }
   };
@@ -65,6 +75,15 @@ function Login() {
             onChange={(e) => setPwd(e.target.value)}
             required
           />
+        </div>
+
+        <div className="mb-6 text-right">
+          <a
+            href="#"
+            className="text-sm text-blue-500 hover:underline"
+          >
+            Email : shiv@gmail.com | Pwd : 12345
+          </a>
         </div>
 
         {/* Button */}
